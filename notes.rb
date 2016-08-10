@@ -15,9 +15,9 @@ Rack::Server.start(
   Port: 3000
 )
 
-## req.env hash
+## what the environment hash looks like
 
-{
+req.env == {
 "GATEWAY_INTERFACE"=>"CGI/1.1",
 "PATH_INFO"=>"/",
 "QUERY_STRING"=>"",

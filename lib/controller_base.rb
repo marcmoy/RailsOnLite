@@ -27,6 +27,7 @@ class ControllerBase
     res.header["location"] = url
     res.status = 302
     session.store_session(res)
+    flash.store_flash(res)
   end
 
   # Populate the response with content.
@@ -38,6 +39,7 @@ class ControllerBase
     @res.body = [content]
     @res['Content-Type'] = content_type
     session.store_session(res)
+    flash.store_flash(res)
   end
 
   # use ERB and binding to evaluate templates
@@ -48,13 +50,17 @@ class ControllerBase
 
     filename = "views/#{controller_name}/#{template}.html.erb"
     content = ERB.new(File.read(filename)).result(binding)
-
+    puts @req
     render_content(content, 'text/html')
   end
 
   # method exposing a `Session` object
   def session
     @session ||= Session.new(req)
+  end
+
+  def flash
+    @flash ||= Flash.new(req)
   end
 
   # use this with the router to call action_name (:index, :show, :create...)
