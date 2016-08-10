@@ -72,5 +72,23 @@ describe Flash do
       cookie_hash = JSON.parse(cookie_val)
       expect(cookie_hash["abc"]).to be_nil
     end
+    it "does REALLY not persist flash.now data" do
+
+      flash.store_flash(res)
+      cookie_str = res.headers['Set-Cookie']
+      cookie = Rack::Utils.parse_query(cookie_str)
+      cookie_val = cookie["_rails_lite_app_flash"]
+      cookie_hash = JSON.parse(cookie_val)
+
+      flash.now["def"] = "uvw"
+      flash.store_flash(res)
+      cookie_str = res.headers['Set-Cookie']
+      cookie = Rack::Utils.parse_query(cookie_str)
+      cookie_val = cookie["_rails_lite_app_flash"]
+      cookie_hash = JSON.parse(cookie_val)
+
+      expect(cookie_hash["abc"]).to be_nil
+      expect(cookie_hash["def"]).to be_nil
+    end
   end
 end
