@@ -50,7 +50,7 @@ class ControllerBase
 
     filename = "views/#{controller_name}/#{template}.html.erb"
     content = ERB.new(File.read(filename)).result(binding)
-    puts @req
+    
     render_content(content, 'text/html')
   end
 
