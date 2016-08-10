@@ -87,3 +87,6 @@ Rack::Server.start(
  app: app,
  Port: 3000
 )
+
+dog = Dog.new(name: "dog", owner: "human")
+dog.save
