@@ -1,4 +1,3 @@
-
 require 'static'
 require 'rack'
 

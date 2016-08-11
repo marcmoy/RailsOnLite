@@ -50,7 +50,7 @@ class ControllerBase
 
     filename = "views/#{controller_name}/#{template}.html.erb"
     content = ERB.new(File.read(filename)).result(binding)
-    
+
     render_content(content, 'text/html')
   end
 
@@ -67,5 +67,11 @@ class ControllerBase
   def invoke_action(name)
     self.send(name)
     render(name) unless @already_built_response
+  end
+
+  def form_authenticity_token
+  end
+
+  def protect_from_forgery
   end
 end
