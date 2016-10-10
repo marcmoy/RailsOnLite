@@ -45,14 +45,10 @@ describe Flash do
       expect(updated_flash["best_pizza"]).to eq("Arizmendi")
     end
 
-    it "can read keys of different data types" do
-      flash[:foo] = "symbol"
-      flash[[1,2,3]] = "array"
-      flash[{a: 1, b: 2, c: 3}] = "hash"
-
-      expect(flash[:foo]).to eq("symbol")
-      expect(flash[[1,2,3]]).to eq("array")
-      expect(flash[{a: 1, b: 2, c: 3}]).to eq("hash")
+    it "can be accessed using either strings or symbols" do
+      flash = Flash.new(req)
+      flash["notice"] = "test"
+      expect(flash[:notice]).to eq("test")
     end
   end
 
@@ -60,6 +56,7 @@ describe Flash do
     before(:each) do
       flash.now["abc"] = "xyz"
     end
+
     it "reads data from flash.now" do
       expect(flash["abc"]).to eq("xyz")
     end
@@ -71,24 +68,6 @@ describe Flash do
       cookie_val = cookie["_rails_lite_app_flash"]
       cookie_hash = JSON.parse(cookie_val)
       expect(cookie_hash["abc"]).to be_nil
-    end
-    it "does REALLY not persist flash.now data" do
-
-      flash.store_flash(res)
-      cookie_str = res.headers['Set-Cookie']
-      cookie = Rack::Utils.parse_query(cookie_str)
-      cookie_val = cookie["_rails_lite_app_flash"]
-      cookie_hash = JSON.parse(cookie_val)
-
-      flash.now["def"] = "uvw"
-      flash.store_flash(res)
-      cookie_str = res.headers['Set-Cookie']
-      cookie = Rack::Utils.parse_query(cookie_str)
-      cookie_val = cookie["_rails_lite_app_flash"]
-      cookie_hash = JSON.parse(cookie_val)
-
-      expect(cookie_hash["abc"]).to be_nil
-      expect(cookie_hash["def"]).to be_nil
     end
   end
 end

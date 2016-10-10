@@ -87,7 +87,6 @@ describe ControllerBase do
 
         expect { dummy_controller.invoke_action(:index) }.not_to raise_error
       end
-
     end
   end
 end
