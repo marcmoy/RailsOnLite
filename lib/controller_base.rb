@@ -53,8 +53,6 @@ class ControllerBase
     nil
   end
 
-  # Phase 3
-
   # use ERB and binding to evaluate templates
   # pass the rendered html to render_content
   def render(template_name)
@@ -100,8 +98,6 @@ class ControllerBase
     res.set_cookie('authenticity_token', value: @token, path: '/')
     @token
   end
-
-  protected
 
   def self.protect_from_forgery
     @@protect_from_forgery = true
