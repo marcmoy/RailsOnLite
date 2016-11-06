@@ -90,7 +90,7 @@ def render(template_name)
 end
 ```
 
-# Models
+## Models
 
 For development, a `DBConnection` class was created to access a `sqlite` database required by the `sqlite3` gem, in order to execute `SQL` commands.
 
@@ -99,7 +99,9 @@ To access an application's database, `Models` are inherited by a `SQLObject` tha
 ```ruby
 # lib/ActiveLiteRecord/sql_object
 class SQLObject
+
   ...
+
   def where(params)
     where_line = params.keys.map { |key| "#{key} = ?" }.join(" AND ")
 
@@ -114,7 +116,9 @@ class SQLObject
 
     parse_all(results)
   end
+
   ...
+
   def update
     set_line = self.class.columns.map { |attr| "#{attr} = ?" }.join(", ")
 
@@ -127,6 +131,8 @@ class SQLObject
         #{self.class.table_name}.id = ?
     SQL
   end
+
   ...
+  
 end
 ```
