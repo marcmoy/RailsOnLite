@@ -97,7 +97,7 @@ For development, a `DBConnection` class was created to access a `sqlite` databas
 To access an application's database, `Models` are inherited by a `SQLObject` that was built with handrolled SQL queries. For example:
 
 ```ruby
-# lib/ActiveLiteRecord/sql_object
+# lib/sql_object.rb
 class SQLObject
 
   ...
