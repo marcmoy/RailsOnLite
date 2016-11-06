@@ -11,6 +11,10 @@ end
 # ARGV[0] is $PORT (see ../Procfile)
 PORT = ARGV[0] || 3000
 server = WEBrick::HTTPServer.new(Port: PORT)
+
+
+# See docs for WEBrick#mount_proc
+# https://ruby-doc.org/stdlib-2.0.0/libdoc/webrick/rdoc/WEBrick/HTTPServer.html#method-i-mount_proc
 server.mount_proc('/') do |req, res|
   router.run(req, res)
 end
