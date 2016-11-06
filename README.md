@@ -133,6 +133,12 @@ class SQLObject
   end
 
   ...
-  
+
 end
 ```
+
+## Future Todos
+
+- [ ] Develop command line tools to generate routes, controllers, and models
+- [ ] Export framework as a Ruby gem
+- [ ] Build a sample project from this framework
